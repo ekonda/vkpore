@@ -1,24 +1,24 @@
 dist: xenial
 language: python
 python:
-  - "3.7"
-  - "3.6"
-  - "3.7-dev"
-  - "3.8-dev"
+- '3.7'
+- '3.6'
+- 3.7-dev
+- 3.8-dev
 install:
-  - python -m pip install pipenv codecov
-  - pipenv install --dev --system --deploy
+- python -m pip install pipenv codecov
+- pipenv install --dev --system --deploy
 script:
-  - make
-  - mypy vkpore
-  - pylint vkpore
+- make
+- mypy vkpore
+- pylint vkpore
 after_success:
-  - codecov
+- codecov
 deploy:
   provider: pypi
-  user: $PYPI_USERNAME
+  user: "$PYPI_USERNAME"
   password:
-    secure: "U5nbEM8enTft29KJV3F5sxwc1ZDdx+HzkrlZSi38fl6nI9Y+7/zxfK91D2vTK456T4SV/mYxe35k9u2Afgsx5hnjzkTT466FYAPLrNgeQdTCeL7WmrGvTUtEUAupkPzbdcHMIGgOuK5xWT7x7a8EGHXmDN6EfStWHmAzmB99Sf+acmbjwwLiInXw8RVcfuJeXSQ9QTmUladgdUcib66L71sGY8cF92k6KX4eQKFtAdI3MkhluDOb3/8dUv9rk73SN4ix5Y5VdRfDiPUmW6HtN10Qvt3DiZ8P3IVNcx2l9enxCghIXh5zGmWAOQUe+XJaYEZMixv8K++3mrzePQkSt9RlrCEyE1iQNwBRQhJrd4KMcEKqf/68Kz0iCTFR6/gcTgkciPS8keHWqzdWANGKYHcaVAytrqxDHu0il1+l4oOdLkDWS+4dvxJ8jTeFDnH1b+Ke5KZ0tn2uUksFqyKMQJlq038KYs39tPIFydbBFvA2PQ8FLm/nzzL07Od6HX8/gnXl+ouASGWut5XuTpWDe39jhWjrphHR9ZKJUn3n0euudO56yrXOFY315jF4i4Wx9fLQokTxl+ziDKRQp+s0f3hpVkmwOl/pE6eY11SqCvY0edYGjmqJUnUySVAMwhAXvcPEG7s2PFQezLRqOGa3OamizktBmUjUrMfRwVtrBC4="
+    secure: oyScg8uFEK2vugG8K4qn9fb54/VxC789CA5K/Q9TUOzx0kmYrfPF9eG9WJO7xmYpOTFr9d9a3xflf4uJlbozvJ+0cWuX4/G5tMGD1oD1nrE2c+L3Fe4mp+725n3hG7PPFQiWL80hAg/v/AiVJi+z2erE2dEMOz85Qoszkq1YQrE5zFGdg4zs7pL9+4AaJEMg19qcx2lUoBJeH71/RBPlGBT3HLomVaqAcRy3I5LIYcMwfhYOBRxgsBcKYWVQpdOdtdbZPX23rnG1B4Dc/fkoYj/GRT+sxKKs6vaFbRQHTMC+aDEdtr00n5iSdI2rCfXcC9KDGaPTHUGsEM/34RTKX5Kh+4/AZDNCKH16dwR8sBDDxwHMeCOOS4VBdwwYRk1Cqnga1wUrrpCE9W5T6TIsrXgXQber7PiwBeuVqmd2Wdtlc7MkbHQY3cwubVcEGVRFXOzdjvkaevyvTiBRxR1yq2h/kX9GImReXm2j7QRvDShc6II8F62XERFaL7vGQoeuA6wqUWNmYr+sDItl/rjBzVF8dkT22YjQa9A2rqMb8+ZrrEmUxj1NRm9luA2R0J5A7EmZt1ER5jh1eXK4JFSPQys1suo3v9SzUIXfS715KDvHhoDv4RRkHoc1aXujXLSKnaamO4PQTYLOR0+pxQ5VV3otSIr/biDMJBGJ/poEo34=
   skip_existing: true
   on:
     branch: master

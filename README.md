@@ -102,6 +102,8 @@ get_event_loop().run_until_complete(application())
 - Use `.request()` to utilize batching with `execute` and respect limits
 - Place your calls to `.request()` between `.start()` and `.stop()`
 
+> You still have to close the session
+
 ```py
 async def application():
     client = VkClient("token")
@@ -113,8 +115,6 @@ async def application():
 
 get_event_loop().run_until_complete(application())
 ```
-
-> You still have to close the session
 
 ## FAQ
 

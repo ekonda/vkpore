@@ -9,7 +9,7 @@ with open('README.md', "r") as f:
 
 setup(
     name='vkpore',
-    version='0.0.2',
+    version='0.1.0',
     description='Library for organizing interactions with Vkontakte api. ',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -17,7 +17,7 @@ setup(
     url='https://github.com/ekonda/vkpore/',
     author='Michael Krukov',
     author_email='krukov.michael@ya.ru',
-    packages=['vkpore', 'vkpore.events', 'vkpore.objects'],
+    packages=['vkpore'],
     install_requires=[
         'aiohttp',
     ],
