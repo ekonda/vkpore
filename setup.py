@@ -10,7 +10,7 @@ with open('README.md', "r") as f:
 setup(
     name='vkpore',
     version='0.1.0',
-    description='Library for organizing interactions with Vkontakte api.',
+    description='Asynchronous library for organizing interactions with Vkontakte api',
     long_description=long_description,
     long_description_content_type='text/markdown',
     keywords=["library", "vkontakte", "asynchronous", "asyncio", "longpoll"],
