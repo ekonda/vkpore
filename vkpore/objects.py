@@ -5,7 +5,7 @@ from abc import ABC
 from .utils import read_only_properties
 
 
-_SLOTS: Tuple[str, ...] = ()
+SLOTS: Tuple[str, ...] = ()
 
 
 @read_only_properties("type", "content")  # pylint: disable=too-few-public-methods
@@ -42,16 +42,16 @@ class Attachment:
             self.content = Wall(self.content_raw)
 
 
-_SLOTS = (
+SLOTS = (
     "type", "source", "id", "owner_id", "access_key",
 )
 
 
-@read_only_properties(*_SLOTS)  # pylint: disable=too-few-public-methods
+@read_only_properties(*SLOTS)  # pylint: disable=too-few-public-methods
 class AttachmentContent(ABC):
     """Class for storing information about attachment's content"""
 
-    __slots__ = _SLOTS
+    __slots__ = tuple(SLOTS)
 
     def __init__(self, _type: str, source: Dict):
         #: Content's type
@@ -81,18 +81,18 @@ class AttachmentContent(ABC):
         return template.format(self.type, self.owner_id, self.id)
 
 
-_SLOTS = (
+SLOTS = (
     "album_id", "user_id", "text", "date", "sizes",
 )
 
-@read_only_properties(*_SLOTS)  # pylint: disable=too-few-public-methods,too-many-instance-attributes
+@read_only_properties(*SLOTS)  # pylint: disable=too-few-public-methods,too-many-instance-attributes
 class Photo(AttachmentContent):
     """
     Class for storing information about photo in attachment.
     Documentation: https://vk.com/dev/objects/photo
     """
 
-    __slots__ = _SLOTS
+    __slots__ = tuple(SLOTS)
 
     def __init__(self, source: Dict):
         super().__init__("photo", source)
@@ -136,20 +136,20 @@ class PhotoSize:
         self.height = int(source.get("height", 0))
 
 
-_SLOTS = (
+SLOTS = (
     "title", "description", "duration", "date",
     "adding_date", "views", "comments", "player",
     "first_frame", "photo",
 )
 
-@read_only_properties(*_SLOTS)  # pylint: disable=too-few-public-methods,too-many-instance-attributes
+@read_only_properties(*SLOTS)  # pylint: disable=too-few-public-methods,too-many-instance-attributes
 class Video(AttachmentContent):
     """
     Class for storing information about photo in attachment.
     https://vk.com/dev/objects/video
     """
 
-    __slots__ = _SLOTS
+    __slots__ = tuple(SLOTS)
 
     def __init__(self, source: Dict):
         super().__init__("video", source)
@@ -188,19 +188,19 @@ class Video(AttachmentContent):
         )
 
 
-_SLOTS = (
+SLOTS = (
     "artist", "title", "duration", "url", "lyrics_id", "album_id", "genre_id",
     "date", "is_hq", "is_explicit",
 )
 
-@read_only_properties(*_SLOTS)  # pylint: disable=too-few-public-methods,too-many-instance-attributes
+@read_only_properties(*SLOTS)  # pylint: disable=too-few-public-methods,too-many-instance-attributes
 class Audio(AttachmentContent):
     """
     Class for storing information about photo in attachment.
     https://vk.com/dev/objects/audio
     """
 
-    __slots__ = _SLOTS
+    __slots__ = tuple(SLOTS)
 
     def __init__(self, source: Dict):
         super().__init__("audio", source)
@@ -227,18 +227,18 @@ class Audio(AttachmentContent):
         self.is_explicit: bool = source.get("is_explicit", False)
 
 
-_SLOTS = (
+SLOTS = (
     "title", "size", "ext", "url", "date", "file_type", "preview",
 )
 
-@read_only_properties(*_SLOTS)  # pylint: disable=too-few-public-methods,too-many-instance-attributes
+@read_only_properties(*SLOTS)  # pylint: disable=too-few-public-methods,too-many-instance-attributes
 class Doc(AttachmentContent):
     """
     Class for storing information about photo in attachment.
     Documentation: https://vk.com/dev/objects/doc
     """
 
-    __slots__ = _SLOTS
+    __slots__ = tuple(SLOTS)
 
     def __init__(self, source: Dict):
         super().__init__("doc", source)
@@ -260,18 +260,18 @@ class Doc(AttachmentContent):
         self.preview: Dict = source.get("preview", {})
 
 
-_SLOTS = (
+SLOTS = (
     "url", "title", "caption", "description", "photo",
 )
 
-@read_only_properties(*_SLOTS)  # pylint: disable=too-few-public-methods,too-many-instance-attributes
+@read_only_properties(*SLOTS)  # pylint: disable=too-few-public-methods,too-many-instance-attributes
 class Link(AttachmentContent):
     """
     Class for storing information about photo in attachment.
     Documentation: https://vk.com/dev/objects/link
     """
 
-    __slots__ = _SLOTS
+    __slots__ = tuple(SLOTS)
 
     def __init__(self, source: Dict):
         super().__init__("link", source)
@@ -290,18 +290,18 @@ class Link(AttachmentContent):
             self.photo = Photo(source["photo"])
 
 
-_SLOTS = (
+SLOTS = (
     "product_id", "sticker_id", "images", "images_with_background",
 )
 
-@read_only_properties(*_SLOTS)  # pylint: disable=too-few-public-methods,too-many-instance-attributes
+@read_only_properties(*SLOTS)  # pylint: disable=too-few-public-methods,too-many-instance-attributes
 class Sticker(AttachmentContent):
     """
     Class for storing information about photo in attachment.
     Documentation: https://vk.com/dev/objects/sticker
     """
 
-    __slots__ = _SLOTS
+    __slots__ = tuple(SLOTS)
 
     def __init__(self, source: Dict):
         super().__init__("sticker", source)
@@ -333,18 +333,18 @@ class StickerSize:
         self.height: int = int(source.get("height", 0))
 
 
-_SLOTS = (
+SLOTS = (
     "thumb_256", "thumb_96", "thumb_48"
 )
 
-@read_only_properties(*_SLOTS)  # pylint: disable=too-few-public-methods,too-many-instance-attributes
+@read_only_properties(*SLOTS)  # pylint: disable=too-few-public-methods,too-many-instance-attributes
 class Gift(AttachmentContent):
     """
     Class for storing information about photo in attachment.
     Documentation: https://vk.com/dev/objects/gift
     """
 
-    __slots__ = _SLOTS
+    __slots__ = tuple(SLOTS)
 
     def __init__(self, source: Dict):
         super().__init__("gift", source)
@@ -357,20 +357,20 @@ class Gift(AttachmentContent):
         self.thumb_48: str = source.get("thumb_48", "")
 
 
-_SLOTS = (
+SLOTS = (
     "from_id", "date", "text", "reply_owner_id", "reply_post_id",
     "comments_count", "likes_count", "reposts_count", "views_count",
     "post_type", "post_source", "attachments", "copy_history",
 )
 
-@read_only_properties(*_SLOTS)  # pylint: disable=too-few-public-methods,too-many-instance-attributes
+@read_only_properties(*SLOTS)  # pylint: disable=too-few-public-methods,too-many-instance-attributes
 class Wall(AttachmentContent):
     """
     Class for storing information about photo in attachment.
     Documentation: https://vk.com/dev/objects/post
     """
 
-    __slots__ = _SLOTS
+    __slots__ = SLOTS
 
     def __init__(self, source: Dict):
         super().__init__("wall", source)

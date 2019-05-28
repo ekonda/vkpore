@@ -6,8 +6,8 @@ python:
   - "3.7-dev"
   - "3.8-dev"
 install:
-  - python -m pip install pipenv pylint mypy codecov
-  - pipenv install -d --deploy
+  - python -m pip install pipenv codecov
+  - pipenv install --dev --system --deploy
 script:
   - make
   - mypy vkpore
