@@ -6,6 +6,7 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/ekonda/vkpore/badge)](https://www.codefactor.io/repository/github/ekonda/vkpore)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/66e342d2507247dcbc5b9a3c7f2fca30)](https://www.codacy.com/app/michaelkrukov/vkpore?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ekonda/vkpore&amp;utm_campaign=Badge_Grade)
 [![codebeat badge](https://codebeat.co/badges/709259fe-147c-41da-8df5-bdbe2d89f67f)](https://codebeat.co/projects/github-com-ekonda-vkpore-master)
+[![PyPI version](https://badge.fury.io/py/vkpore.svg)](https://badge.fury.io/py/vkpore)
 
 Asynchronous library for organizing interactions with
 [Vkontakte](https://vk.com/dev) api.
