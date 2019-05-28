@@ -1,17 +1,21 @@
 dist: xenial
 language: python
 python:
-- '3.7'
-- '3.6'
-- 3.7-dev
-- 3.8-dev
+  - "3.7"
+  - "3.6"
+  - "3.7-dev"
+  - "3.8-dev"
+cache:
+  directories:
+    - $PIP_CACHE_DIR
+    - $PIPENV_CACHE_DIR
 install:
-- python -m pip install pipenv codecov
-- pipenv install --dev --system --deploy
+  - python -m pip install pipenv codecov
+  - pipenv install --dev --system --deploy
 script:
-- make
-- mypy vkpore
-- pylint vkpore
+  - make
+  - mypy vkpore
+  - pylint vkpore
 after_success:
 - codecov
 deploy:
@@ -23,3 +27,7 @@ deploy:
   on:
     branch: master
     tags: true
+env:
+  global:
+    - PIP_CACHE_DIR=$HOME/.cache/pip
+    - PIPENV_CACHE_DIR=$HOME/.cache/pipenv
