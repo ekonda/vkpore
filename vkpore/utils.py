@@ -3,6 +3,7 @@
 from typing import Awaitable
 import asyncio
 
+
 async def wait_with_stopped(awaitable: Awaitable, stopped: Awaitable, loop=None):
     """
     Wait for awaitable or stopped to complete. If stopped was
@@ -20,3 +21,19 @@ async def wait_with_stopped(awaitable: Awaitable, stopped: Awaitable, loop=None)
         return None
 
     return done.pop().result()
+
+
+def read_only_properties(*attrs):
+    """Make passed attributes read-only"""
+    def decorator(cls):
+        original_setattr = cls.__setattr__
+
+        def modified_setattr(self, name, value):
+            if name in attrs and getattr(self, name, None) is not None:
+                raise AttributeError("Can't modify '{}'".format(name))
+            original_setattr(self, name, value)
+
+        cls.__setattr__ = modified_setattr
+
+        return cls
+    return decorator

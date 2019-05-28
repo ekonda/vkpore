@@ -9,8 +9,8 @@ apidoc:
 htmldocs:
 	cd docs && make html
 
-run_example:
-	@PYTHONPATH=${PWD} python3 example/run.py ${shell cat example/.token | tr -d '\n'}
+run:
+	@PYTHONPATH=${PWD} python3 example/lognpoll.py ${shell cat example/.token | tr -d '\n'}
 
 check: test
 	mypy vkpore

@@ -17,7 +17,7 @@ setup(
     url='https://github.com/ekonda/vkpore/',
     author='Michael Krukov',
     author_email='krukov.michael@ya.ru',
-    packages=['vkpore', 'vkpore.events'],
+    packages=['vkpore', 'vkpore.events', 'vkpore.objects'],
     install_requires=[
         'aiohttp',
     ],

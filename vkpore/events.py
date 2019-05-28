@@ -1,35 +1,18 @@
 """Module with possible events and classes/functions related to that."""
 
-from typing import List, Dict, Callable, Tuple, Awaitable, Optional, Union
+from typing import List, Dict, Callable, Tuple, Awaitable, Optional
 from random import random
 from abc import ABC
 import logging
+
+from .utils import read_only_properties
+from .objects import Action, Attachment
 
 
 Callback = Callable[["Event"], Awaitable]
 
 
-# ----------------------------------------------------------------------------
-# Helpers
-
-
 _SLOTS: Tuple[str, ...] = ()
-
-
-def read_only_properties(*attrs):
-    """Make passed attributes read-only"""
-    def decorator(cls):
-        original_setattr = cls.__setattr__
-
-        def modified_setattr(self, name, value):
-            if name in attrs and getattr(self, name, None) is not None:
-                raise AttributeError("Can't modify '{}'".format(name))
-            original_setattr(self, name, value)
-
-        cls.__setattr__ = modified_setattr
-
-        return cls
-    return decorator
 
 
 # ----------------------------------------------------------------------------
@@ -90,126 +73,6 @@ class EventRaw(Event):
 
     def __init__(self, group_id, source: Dict):
         super().__init__("vk:raw", group_id, source)
-
-# ----------------------------------------------------------------------------
-# [Vkontakte objcet](https://vk.com/dev)
-
-
-@read_only_properties("type", "content")  # pylint: disable=too-few-public-methods
-class Attachment:
-    """Class for storing information about attachment."""
-
-    __slots__ = ("type", "content", "content_raw",)
-
-    def __init__(self, source: Dict):
-        #: Attachment type.
-        self.type: str = source.get("type", "")
-        #: Raw object.
-        self.content_raw: Dict = source.get(self.type, {})
-        #: Supported attachment content class or None.
-        self.content: Union[None, Photo] = None
-
-        if self.type == "photo":
-            self.content = Photo(self.content_raw)
-
-@read_only_properties("type")  # pylint: disable=too-few-public-methods
-class AttachmentContent(ABC):
-    """Class for storing information about attachment's content"""
-
-    def __init__(self, _type: str):
-        #: Content's type
-        self.type: str = _type
-
-
-_SLOTS = (
-    "id", "album_id", "owner_id", "user_id", "text",
-    "date", "sizes", "type", "access_key",
-)
-
-@read_only_properties(*_SLOTS)  # pylint: disable=too-few-public-methods,too-many-instance-attributes
-class Photo(AttachmentContent):
-    """Class for storing information about photo in attachment."""
-
-    __slots__ = _SLOTS
-
-    def __init__(self, source: Dict):
-        super().__init__("photo")
-
-        #: Photo id.
-        self.id: int = int(source.get("id", 0))
-        #: Photo's album id.
-        self.album_id: int = int(source.get("album_id", 0))
-        #: Photo's owner id.
-        self.owner_id: int = int(source.get("owner_id", 0))
-        #: Photo's access_key if present.
-        self.access_key: str = source.get("access_key", "")
-        #: Uploader's id (100 if uploaded by group)
-        self.user_id: int = int(source.get("user_id", 0))
-        #: Photo's description
-        self.text: str = source.get("text", "")
-        #: Date of adding in Unixtime
-        self.date: int = source.get("date", "")
-        #: Tuple with photo's sizes
-        self.sizes: Tuple[PhotoSize, ...] = tuple(
-            PhotoSize(s) for s in source.get("sizes", ())
-        )
-
-    @property
-    def prepared(self) -> str:
-        """
-        Return string in format "<type><owner_id>_<media_id>".
-        If attachment has "access_key" fields - it will be properly appended.
-        """
-        template = "{}{}_{}"
-
-        if self.access_key:
-            template = "{}{}_{}_" + self.access_key
-
-        return template.format(self.type, self.owner_id, self.id)
-
-    @property
-    def uploaded_by_group(self) -> bool:
-        """Return True if photo was uploaded by user."""
-        return self.user_id == 100
-
-
-@read_only_properties("type", "url", "width", "height")  # pylint: disable=too-few-public-methods
-class PhotoSize:
-    """
-    Class for string information about photo size. Documentation:
-    https://vk.com/dev/photo_sizes
-    """
-
-    __slots__ = ("type", "url", "width", "height")
-
-    def __init__(self, source: Dict):
-        #: Size type
-        self.type = source.get("type", "")
-        #: Image url
-        self.url = source.get("url", "")
-        #: Image width
-        self.width = int(source.get("width", 0))
-        #: Image height
-        self.height = int(source.get("height", 0))
-
-
-@read_only_properties("type", "member_id", "text", "email", "photo")  # pylint: disable=too-few-public-methods
-class Action:
-    """Class for storing information about action in "message_new" event."""
-
-    __slots__ = ("type", "member_id", "text", "email", "photo")
-
-    def __init__(self, source: Dict):
-        #: Action type
-        self.type: str = source.get("type", "")
-        #: Member id if action related to users
-        self.member_id: int = int(source.get("member_id", 0))
-        #: New title
-        self.text: str = source.get("text", "")
-        #: Invited person's email (if memeber_id < 0)
-        self.email: str = source.get("email", "")
-        #: Three sizes of new cover
-        self.photo: Dict[str, str] = source.get("photo", {})
 
 
 _SLOTS = (

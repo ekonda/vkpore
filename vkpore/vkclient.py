@@ -26,10 +26,10 @@ class Request(Future):
 class VkClient:  #pylint: disable=too-many-instance-attributes
     """Class for interacting with Vkontakte."""
 
-    def __init__(self, token: str, session: ClientSession, loop: AEL = None):
+    def __init__(self, token: str, session: ClientSession = None, loop: AEL = None):
         self._token: str = token
         self._loop: AEL = loop or asyncio.get_event_loop()
-        self._session: ClientSession = session
+        self._session: ClientSession = session or ClientSession()
         self._api_url: str = "https://api.vk.com/method/{method}"
         self._version: str = "5.92"
         self._loop_pause: float = 1 / 19
@@ -250,3 +250,8 @@ class VkClient:  #pylint: disable=too-many-instance-attributes
             return response["updates"]
 
         return get
+
+    async def close_session(self):  # pragma: no cover
+        """Close this client's session."""
+        if self._session:
+            await self._session.close()
