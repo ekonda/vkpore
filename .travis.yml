@@ -1,0 +1,25 @@
+dist: xenial
+language: python
+python:
+  - "3.7"
+  - "3.6"
+  - "3.7-dev"
+  - "3.8-dev"
+install:
+  - python -m pip install pipenv pylint mypy codecov
+  - pipenv install -d --deploy
+script:
+  - make
+  - mypy vkpore
+  - pylint vkpore
+after_success:
+  - codecov
+deploy:
+  provider: pypi
+  user: $PYPI_USERNAME
+  password:
+    secure: "U5nbEM8enTft29KJV3F5sxwc1ZDdx+HzkrlZSi38fl6nI9Y+7/zxfK91D2vTK456T4SV/mYxe35k9u2Afgsx5hnjzkTT466FYAPLrNgeQdTCeL7WmrGvTUtEUAupkPzbdcHMIGgOuK5xWT7x7a8EGHXmDN6EfStWHmAzmB99Sf+acmbjwwLiInXw8RVcfuJeXSQ9QTmUladgdUcib66L71sGY8cF92k6KX4eQKFtAdI3MkhluDOb3/8dUv9rk73SN4ix5Y5VdRfDiPUmW6HtN10Qvt3DiZ8P3IVNcx2l9enxCghIXh5zGmWAOQUe+XJaYEZMixv8K++3mrzePQkSt9RlrCEyE1iQNwBRQhJrd4KMcEKqf/68Kz0iCTFR6/gcTgkciPS8keHWqzdWANGKYHcaVAytrqxDHu0il1+l4oOdLkDWS+4dvxJ8jTeFDnH1b+Ke5KZ0tn2uUksFqyKMQJlq038KYs39tPIFydbBFvA2PQ8FLm/nzzL07Od6HX8/gnXl+ouASGWut5XuTpWDe39jhWjrphHR9ZKJUn3n0euudO56yrXOFY315jF4i4Wx9fLQokTxl+ziDKRQp+s0f3hpVkmwOl/pE6eY11SqCvY0edYGjmqJUnUySVAMwhAXvcPEG7s2PFQezLRqOGa3OamizktBmUjUrMfRwVtrBC4="
+  skip_existing: true
+  on:
+    branch: master
+    tags: true

@@ -1,6 +1,18 @@
-# vkpore
+# Vkpore
 
-Library for organizing interactions with [Vkontakte](https://vk.com/) api.
+[![Build Status](https://travis-ci.com/ekonda/vkpore.svg?branch=master)](https://travis-ci.com/ekonda/vkpore)
+[![codecov](https://codecov.io/gh/ekonda/vkpore/branch/master/graph/badge.svg)](https://codecov.io/gh/ekonda/vkpore)
+[![Documentation Status](https://readthedocs.org/projects/vkpore/badge/?version=latest)](https://vkpore.readthedocs.io/en/latest/?badge=latest)
+[![CodeFactor](https://www.codefactor.io/repository/github/ekonda/vkpore/badge)](https://www.codefactor.io/repository/github/ekonda/vkpore)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/66e342d2507247dcbc5b9a3c7f2fca30)](https://www.codacy.com/app/michaelkrukov/vkpore?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ekonda/vkpore&amp;utm_campaign=Badge_Grade)
+[![codebeat badge](https://codebeat.co/badges/709259fe-147c-41da-8df5-bdbe2d89f67f)](https://codebeat.co/projects/github-com-ekonda-vkpore-master)
+
+Asynchronous library for organizing interactions with
+[Vkontakte](https://vk.com/dev) api.
+
+## Documentation
+
+Documentation is available [here](https://vkpore.readthedocs.io/).
 
 ## Features
 
@@ -25,17 +37,6 @@ async def _(event: MessageNew):  # Echo callback
 app.run()
 ```
 
-## Roadmap
-
-- [_] Documentation
-- [_] Continuous integration
-- [_] Publish module
-- [_] Improve `NewMessage`:
-  - [_] Attachments
-  - [_] Actions
-  - [_] Forwarded messages
-- [_] Benchmarks
-
 ## FAQ
 
 - **Is there plugins?** No. `Vkpore` is a library for aiding in developing
@@ -51,3 +52,24 @@ app.run()
   `VkClient` - it will possibly work fine.
 
 - **Does this library support telegram?** No. It's library for vkontakte.
+
+## Roadmap
+
+- [x] Documentation
+- [x] Continuous integration
+- [x] Publish module
+- [x] Improve `NewMessage`:
+  - [x] Attachments
+  - [x] Actions
+  - [x] Forwarded messages
+- [_] Improve `Attachment`:
+  - [_] Video
+  - [_] Audio
+  - [_] Doc
+  - [_] Link
+  - [_] MarketAlbum
+  - [_] Wall
+  - [_] WallReply
+  - [_] Sticker
+  - [_] Gift
+- [_] Benchmarks

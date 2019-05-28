@@ -3,6 +3,7 @@
 import logging
 
 from .vkpore import Vkpore
+from .vkclient import VkClient
 
 
 logging.basicConfig(

@@ -204,6 +204,8 @@ class VkClient:  #pylint: disable=too-many-instance-attributes
             longpoll = {**default_longpoll}
 
         async def refresh():
+            """Get new values for longpolling."""
+
             response = await self.request(
                 "groups.getLongPollServer", group_id=self.group_id
             )
@@ -214,6 +216,8 @@ class VkClient:  #pylint: disable=too-many-instance-attributes
                 longpoll["ts"] = response["ts"]
 
         async def get():
+            """Request new updates from Vkontakte."""
+
             while not longpoll:
                 await refresh()
 

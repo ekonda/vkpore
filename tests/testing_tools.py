@@ -16,7 +16,7 @@ class Session:
     async def post(self, url, data):
         self.calls.append((url, data))
 
-        class _response:
+        class _response:  # pylint: disable=too-few-public-methods
             @staticmethod
             async def json(**_):
                 if self.exception is not None:

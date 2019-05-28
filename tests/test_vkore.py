@@ -13,7 +13,6 @@ def app(event_loop):
 
     yield app
 
-
 def test_initialization():
     app = Vkpore(["token"])
 
