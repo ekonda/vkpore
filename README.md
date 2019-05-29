@@ -9,11 +9,12 @@
 [![PyPI version](https://badge.fury.io/py/vkpore.svg)](https://badge.fury.io/py/vkpore)
 
 Asynchronous library for organizing interactions with
-[Vkontakte](https://vk.com/dev) api.
+[Vkontakte](https://vk.com/dev) api
 
 ## Documentation
 
-Documentation is available [here](https://vkpore.readthedocs.io/).
+Documentation is available [here](https://vkpore.readthedocs.io/). Before
+asking the questions - please consult the documentation with its FAQ.
 
 ## Features
 
@@ -30,7 +31,7 @@ Documentation is available [here](https://vkpore.readthedocs.io/).
 
 You can use these classes from `vkpore.objects` to parse source data into
 instances. If you need something not supported by the library, every
-instance has `.source` field with raw source data.
+instance has `.content_raw` field with raw source data.
 
 - `Sticker` (type: `sticker`)
 - `Video` (type: `video`)
