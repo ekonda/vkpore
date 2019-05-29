@@ -5,4 +5,6 @@ build:
 
 python:
   version: 3.7
-  setup_py_install: true
+  install:
+    - method: setuptools
+    - path: .
