@@ -6,5 +6,9 @@ build:
 python:
   version: 3.7
   install:
+    - method: pip
+      path: .
+      extra_requirements:
+        - m2r
     - method: setuptools
       path: .
