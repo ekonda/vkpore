@@ -60,7 +60,7 @@ for type `vk:<vkontakte-event-name>`. The callback will receive an event
 instance through which you can interact with Vkontakte.
 
 To start the manager, just call `.run()` method. If you want to run
-manager in backgroudn, you can use use coroutine `.start()`.
+manager in background, you can use use coroutine `.start()`.
 
 #### Example
 
