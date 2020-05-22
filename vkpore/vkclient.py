@@ -147,6 +147,7 @@ class VkClient:  #pylint: disable=too-many-instance-attributes
 
         if self._running_loop:
             await self._running_loop
+            self._running_loop = None
 
     async def request(self, method: str, **kwargs):
         """

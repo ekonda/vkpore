@@ -9,9 +9,8 @@ from .testing_tools import Session
 
 @pytest.fixture
 def app(event_loop):
-    app = Vkpore(["token"], session=Session(), loop=event_loop)
+    yield Vkpore(["token"], session=Session(), loop=event_loop)
 
-    yield app
 
 def test_initialization():
     app = Vkpore(["token"])

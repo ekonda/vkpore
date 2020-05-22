@@ -5,6 +5,7 @@ import aiohttp
 from vkpore.vkclient import VkClient
 from .testing_tools import Session
 
+
 @pytest.mark.asyncio
 async def test_initialization():
     client = VkClient("token", session=Session())
@@ -28,6 +29,7 @@ async def test_initialization():
         )
     ]
 
+
 @pytest.mark.asyncio
 async def test_loop_twice():
     client = VkClient("token", session=Session())
@@ -38,6 +40,22 @@ async def test_loop_twice():
         client.start()
 
     await client.stop()
+
+
+@pytest.mark.asyncio
+async def test_loop_restart():
+    client = VkClient("token", session=Session())
+
+    assert not client._running_loop
+    client.start()  # Start
+    assert client._running_loop
+    await client.stop()  # Stop
+    assert not client._running_loop
+    client.start()  # Start again
+    assert client._running_loop
+    await client.stop()  # Stop again
+    assert not client._running_loop
+
 
 @pytest.mark.asyncio
 async def test_request():
