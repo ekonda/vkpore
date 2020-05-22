@@ -24,7 +24,6 @@ asking the questions - please consult the documentation with its FAQ.
 - Heavily annotated types
 - Extensive testing
 - Supports multiple groups at the same time
-- Small overhead
 - Build on experience and many known use cases
 
 ### Supported attachments
